@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 //   handleAdd: (e: React.FormEvent) => void;
 // }
 
-const AddSong: React.FC = ( ) => {
+const AddSong= ( props:{array:Song[],setArray: React.Dispatch<React.SetStateAction<Song[]>>}) => {
 const navigate = useNavigate();
 const [song,setSong]=useState<Song>({
           id: 0,
@@ -19,7 +19,8 @@ const [song,setSong]=useState<Song>({
           price: 0,
           genere: "",
       });
-  
+      let songs=props.array;
+      let setSongs=props.setArray;
   const inputRef = useRef<HTMLInputElement>(null);
   // const [title,setTitle]=useState<string>("");
   // const [artist,setArtist]=useState<string>("");
@@ -35,10 +36,19 @@ const [song,setSong]=useState<Song>({
       onSubmit={(e) => {
         e.preventDefault();
         // inputRef.current?.blur();
-        alert("jjj");
-        navigate('/',{state:{newSong:song}})
+        setSongs([...songs,song]);
+        alert("The song was successfully added");
+        // navigate('/');
       }}
     >
+      <input
+        type="number"
+        placeholder="id"
+        className="input__box"
+        onChange={(e) => {setSong({...song,id:e.target.valueAsNumber})}}
+
+        
+      />
       <input
         type="text"
         placeholder="title"

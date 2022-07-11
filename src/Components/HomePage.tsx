@@ -7,24 +7,27 @@ import MySong from "./SingleSong";
 
 
 
-const HomePage:React.FC=()=>{
+const HomePage=(props:{array:Song[],setArray: React.Dispatch<React.SetStateAction<Song[]>>})=>{
   const  location=useLocation();
   const myLoction: any = location.state;
     const navigate = useNavigate();
-    const [songs,setSongs ]=useState<Song[]>([{ id: 1, title: "mother", artist: "Abraham Fried", length: 5, price: 65, genere: "POP" },
-    { id: 2, title: "father", artist: "Abraham Fried", length: 5, price: 65, genere: "POP"}]);
+    let songs=props.array;
+    let setSongs=props.setArray;
+
+    // const [songs,setSongs ]=useState<Song[]>([{ id: 1, title: "mother", artist: "Abraham Fried", length: 5, price: 65, genere: "POP" },
+    // { id: 2, title: "father", artist: "Abraham Fried", length: 5, price: 65, genere: "POP"}]);
     
 
 console.log(location.state)
-useEffect(() => {
-    if (myLoction) {
-        alert("gggg");
-        setSongs([...songs,myLoction.newSong]);
-    }
-    console.log(songs[3])
+// useEffect(() => {
+//     if (myLoction) {
+//         alert("gggg");
+//         setSongs([...songs,myLoction.newSong]);
+//     }
+    
 
 
-}, [location]);
+// }, [location]);
 
 
 
@@ -47,15 +50,28 @@ useEffect(() => {
 //         // setTodo("");
     
 //     }; 
+let artist:string=" ";
+const onAdd=(e:any) => {
+    e.preventDefault();
+    // inputRef.current?.blur();
+  
+    navigate(`/AddSong/${songs}/${setSongs}`) 
+  }
+  
     return(
 <div>
+  <form  onSubmit={() => navigate(`/SearchSong/${artist}`)}>
+  <input placeholder="Enter artist name"
+  onChange={(e)=>artist=e.target.value}/>
+  <button type="submit">search</button>
+  </form>
 <div className='songs'>
     <span>Tytle</span><span>Artist</span><span>Price</span>
 </div>  
 <div >
       {songs.map(song =><MySong song={song} songs={songs} setSongs={setSongs}/> )}
 </div>
-<button onClick={()=> { navigate('/AddSong') }} >ADD</button>
+<button onClick={(e)=> onAdd(e)} >ADD</button>
 </div>
     )
 

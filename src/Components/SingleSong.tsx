@@ -10,17 +10,14 @@ interface Props{
 const MySong=({song,songs,setSongs}:Props)=>
 {
     const navigate=useNavigate();
-    
-    
-
-   
     return(
         
         <div className="lSongs" >
             {song.artist} {song.title} {song.price+"$"}
-        <button>Delete</button>
+        <button onClick={()=>setSongs(songs.filter((s)=>s.id!=song.id))}>Delete</button>
         <button onClick={()=> { navigate(`/EditSong/${song.id}`) }}>
-            
+          
+            edit
         </button>
         
         </div>
