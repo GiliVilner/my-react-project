@@ -1,79 +1,67 @@
-import React, { useEffect, useState } from "react";
+
 import './styles.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Song } from "../model";
 import MySong from "./SingleSong";
+import datagrid from '@mui/x-data-grid';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { Table, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { PropaneSharp } from '@mui/icons-material';
 
 
-
-
-const HomePage=(props:{array:Song[],setArray: React.Dispatch<React.SetStateAction<Song[]>>})=>{
+const HomePage=(props:{array:Song[],searchSong:Function,deleteSong:Function,setArray: React.Dispatch<React.SetStateAction<Song[]>>})=>{
   const  location=useLocation();
   const myLoction: any = location.state;
     const navigate = useNavigate();
     let songs=props.array;
     let setSongs=props.setArray;
-
-    // const [songs,setSongs ]=useState<Song[]>([{ id: 1, title: "mother", artist: "Abraham Fried", length: 5, price: 65, genere: "POP" },
-    // { id: 2, title: "father", artist: "Abraham Fried", length: 5, price: 65, genere: "POP"}]);
     
-
-console.log(location.state)
-// useEffect(() => {
-//     if (myLoction) {
-//         alert("gggg");
-//         setSongs([...songs,myLoction.newSong]);
-//     }
-    
-
-
-// }, [location]);
-
-
-
-
-//     const [song,setSong]= useState<Song>({
-//         id: 0,
-//         title: "",
-//         artist: "",
-//         length: 0,
-//         price: 0,
-//         genere: "",
-        
-//     });      
-// const handleAdd=(e:React.FormEvent)=>{
-//     e.preventDefault();
-//     if(song)
-//         setSongs([...songs,{id:song.id,artist:song.artist,title:song.title,genere:song.genere,
-//             price:song.price,length:song.length}]);
-//         // setTodos([...todos,{id:Date.now(),todo:todo,isTodo:false}])
-//         // setTodo("");
-    
-//     }; 
 let artist:string=" ";
 const onAdd=(e:any) => {
     e.preventDefault();
     // inputRef.current?.blur();
   
-    navigate(`/AddSong/${songs}/${setSongs}`) 
+    navigate(`/AddSong`) 
   }
+  const searchArtist=(e:any,artist:string) => {
+    e.preventDefault();
+    // inputRef.current?.blur();
+  props.searchSong(artist);
+  }
+ 
   
     return(
-<div>
-  <form  onSubmit={() => navigate(`/SearchSong/${artist}`)}>
+<>
+  
+  <form  onSubmit={(e) =>
+searchArtist(e,artist)
+  }>
   <input placeholder="Enter artist name"
   onChange={(e)=>artist=e.target.value}/>
   <button type="submit">search</button>
   </form>
-<div className='songs'>
-    <span>Tytle</span><span>Artist</span><span>Price</span>
-</div>  
-<div >
-      {songs.map(song =><MySong song={song} songs={songs} setSongs={setSongs}/> )}
-</div>
+  <TableContainer>
+  <Table sx={{minWidth:250}} aria-label="simple table" className='table-ss'>
+<TableHead>
+  <TableRow>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">title</TableCell>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">artist</TableCell>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">price</TableCell>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">genre</TableCell>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">length</TableCell>
+    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">delete/edit</TableCell>
+  </TableRow>
+</TableHead>{songs.map(song =><MySong song={song} deleteSong={props.deleteSong} songs={songs} setSongs={setSongs}/> )}
+
+  </Table>
+</TableContainer>
+
 <button onClick={(e)=> onAdd(e)} >ADD</button>
-</div>
+</>
     )
 
 }
+
 export default HomePage;
