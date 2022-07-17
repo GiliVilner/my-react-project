@@ -1,8 +1,12 @@
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Song } from "../model";
 import HomePage from './HomePage';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AddIcon from '@mui/icons-material/Add';
+import {AutoDisabler,Validate,ValidationGroup}from 'mui-validate'
+import { FormControl } from "@mui/material";
 // interface props {
 //   song: Song;
 //   setSong: React.Dispatch<React.SetStateAction<string>>;
@@ -12,13 +16,14 @@ import { useNavigate } from "react-router-dom";
 const AddSong= ( props:{array:Song[],setArray: React.Dispatch<React.SetStateAction<Song[]>>}) => {
 const navigate = useNavigate();
 const [song,setSong]=useState<Song>({
-          id: 0,
+         
           title: "",
           artist: "",
           length: 0,
           price: 0,
           genere: "",
       });
+
       let songs=props.array;
       let setSongs=props.setArray;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,24 +36,24 @@ const [song,setSong]=useState<Song>({
   return (
       <>
       <h1>ADD SONG</h1>
+      <ValidationGroup>
+        <FormControl  sx={{m:5,minWidth:200}}>
+
+        </FormControl>
+      </ValidationGroup>
     <form
       className="input"
-      onSubmit={(e) => {
-        e.preventDefault();
-        // inputRef.current?.blur();
-        setSongs([...songs,song]);
-        alert("The song was successfully added");
-        // navigate('/');
-      }}
-    >
-      <input
-        type="number"
-        placeholder="id"
-        className="input__box"
-        onChange={(e) => {setSong({...song,id:e.target.valueAsNumber})}}
+       onSubmit={async(e) => {alert(song.artist)
+       
+        
+       await axios.post(`http://localhost:8080/songs`,song)
+      .then(res => {
 
         
-      />
+      })
+      }}
+    >
+      
       <input
         type="text"
         placeholder="title"

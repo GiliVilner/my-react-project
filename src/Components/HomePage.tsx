@@ -29,6 +29,7 @@ const onAdd=(e:any) => {
     e.preventDefault();
     // inputRef.current?.blur();
   props.searchSong(artist);
+  console.log(songs);
   }
  
   

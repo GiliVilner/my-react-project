@@ -15,7 +15,8 @@ function ParentComponent() {
     await axios.get('http://localhost:8080/songs').then((res) => {
       console.log(res.data)
       setSongs(res.data);
-    })}
+    }).catch((error) => { console.log(error) })
+  }
     f()
    },[])
   
@@ -33,7 +34,8 @@ function ParentComponent() {
   .then(res => {
     alert(newSongValue?.id);
     console.log(songs);
-  })}
+  }).catch((error) => { console.log(error) })
+}
    
   const deleteSong=async(e:any,song:Song)=>{
     alert("השיר ימחק ולא יהיה ניתן לשחזרו");
@@ -42,7 +44,7 @@ function ParentComponent() {
  await axios.delete(`http://localhost:8080/songs/deletesongbyid/${song.id}`)
  .then(res => {
   setSongs(songs.filter((s)=>s.id!=song.id));
- })
+ }).catch((error) => { console.log(error) })
      }
 
   
@@ -51,14 +53,15 @@ function ParentComponent() {
       alert(artistName)
       debugger
       await axios.get(`http://localhost:8080/songs/getallsongsofaspecificartist/${artistName}`).then(res=>{
-        debugger
+        
         alert(res.data.length);
         console.log(res.data);
-        let copySongs = [...res.data];
-        setSongs(copySongs);
+        
+        setSongs(res.data);
         console.log(songs);
         alert(songs.length);
-      })}
+      }).catch((error) => { console.log(error) })
+    }
       // if(artistName===""){ alert(artistName);
       //   // await axios.get('http://localhost:8080/songs').then(res => {
       //   //   console.log(res.data)
