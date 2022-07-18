@@ -1,8 +1,8 @@
 
-import './styles.css';
+import '../Components/styles.css'
 import { useLocation, useNavigate } from "react-router-dom";
 import { Song } from "../model";
-import MySong from "./SingleSong";
+import MySong from "../Components/SingleSong";
 import datagrid from '@mui/x-data-grid';
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -25,19 +25,17 @@ const onAdd=(e:any) => {
   
     navigate(`/AddSong`) 
   }
-  const searchArtist=(e:any,artist:string) => {
+  const searchArtist=(e:any,artist:string)=>{
     e.preventDefault();
-    // inputRef.current?.blur();
-  props.searchSong(artist);
-  console.log(songs);
+props.searchSong(artist);
+alert(artist);
   }
- 
   
     return(
 <>
   
   <form  onSubmit={(e) =>
-searchArtist(e,artist)
+  searchArtist(e,artist)
   }>
   <input placeholder="Enter artist name"
   onChange={(e)=>artist=e.target.value}/>
@@ -54,7 +52,7 @@ searchArtist(e,artist)
     <TableCell sx={{color:'rgb(242,68,119)'}} align="center">length</TableCell>
     <TableCell sx={{color:'rgb(242,68,119)'}} align="center">delete/edit</TableCell>
   </TableRow>
-</TableHead>{songs.map(song =><MySong song={song} deleteSong={props.deleteSong} songs={songs} setSongs={setSongs}/> )}
+</TableHead>{songs.map((song,index)=><MySong key={index} song={song} deleteSong={props.deleteSong} songs={songs} setSongs={setSongs}/> )}
 
   </Table>
 </TableContainer>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Song } from "../model";
-import EditSong from "./EditSong";
+import EditSong from "../Pages/EditSong";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TableBody, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
@@ -14,7 +14,7 @@ interface Props{
 }
 
 const MySong=({song,songs,deleteSong,setSongs}:Props)=>
-{const [songDetails]=useState<any[]>([ song.title, song.artist,  song.price+"$", song.genere, song.length])
+{const songDetails=([ song.title, song.artist,  song.price+"$", song.genere, song.length]);
     // const deleteSong=async(e:any)=>{
     //    alert("השיר ימחק ולא יהיה ניתן לשחזרו");
     //     // e.prevendefoult(); 
@@ -28,7 +28,7 @@ const MySong=({song,songs,deleteSong,setSongs}:Props)=>
         <TableBody>
             {
                 <TableRow key={song.title} sx={{'&:last-child th':{border:0}}} className="TableRow">
-                  {songDetails.map((i:any[],index)=>{
+                  {songDetails.map((i:any,index)=>{
                     return(
                         <TableCell align="center" key={index}>{i}</TableCell>
                     )

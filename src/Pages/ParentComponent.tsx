@@ -4,7 +4,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { Song } from "../model";
 import AddSong from "./AddSong";
 import EditSong from "./EditSong";
-import HomePage from "./HomePage";
+import HomePage from "../Pages/HomePage";
 
 
 function ParentComponent() {
@@ -50,17 +50,15 @@ function ParentComponent() {
   
   
      const searchSong=async(artistName:string)=>{
-      alert(artistName)
+      alert(artistName);
       debugger
-      await axios.get(`http://localhost:8080/songs/getallsongsofaspecificartist/${artistName}`).then(res=>{
-        
+      await axios.get(`http://localhost:8080/songs/getallsongsofaspecificartist/${artistName}`).then(res=>{ 
         alert(res.data.length);
-        console.log(res.data);
-        
+        console.log(res.data);    
         setSongs(res.data);
         console.log(songs);
         alert(songs.length);
-      }).catch((error) => { console.log(error) })
+      })
     }
       // if(artistName===""){ alert(artistName);
       //   // await axios.get('http://localhost:8080/songs').then(res => {

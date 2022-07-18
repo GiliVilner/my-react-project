@@ -11,7 +11,7 @@ import './Components/styles.css'
 // import SearchSong from './Components/SearchSong';
 // import axios from 'axios';
 
-import ParentComponent from "./Components/ParentComponent";
+import ParentComponent from "./Pages/ParentComponent";
 
 
 

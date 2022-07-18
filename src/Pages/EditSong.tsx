@@ -2,7 +2,7 @@ import { Alert } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom"; 
-import { Song } from "../model";
+import { Genre, Song } from "../model";
 import HomePage from "./HomePage";
 
 const EditSong= (props:{array:Song[],editSong:Function} ) => {
@@ -29,6 +29,19 @@ const EditSong= (props:{array:Song[],editSong:Function} ) => {
 
     // <HomePage tempArr={tempArr} setTempArr={setTempArr}/>
     
+    // const addGenre=(genreName:string)=>{
+    //   switch(genreName){
+    //   case "CLASSIC":
+    //         setS({...s,genere:Genre.CLASSIC})
+    //   case "POP":
+    //         setS({...s,genere:Genre.POP})
+    //  case "ROCK":
+    //         setS({...s,genere:Genre.ROCK})
+    //   default:
+    //             setS({...s,genere:Genre.RAP})
+    //   }
+      
+    // }
 return(   
     <>   
 <h1>edit</h1>
@@ -62,7 +75,7 @@ onSubmit={(e) => {
    type="text"
    placeholder="genre"
    defaultValue={s.genere}
-   onChange={(e) => setS({...s,genere:e.target.value})}
+   onChange={(e) => setS({...s,genere:Genre.CLASSIC})}
    className="input__box"
  />
    <input

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { Song } from "../model";
+import { Genre, Song } from "../model";
 import HomePage from './HomePage';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,7 +21,7 @@ const [song,setSong]=useState<Song>({
           artist: "",
           length: 0,
           price: 0,
-          genere: "",
+          genere: Genre.CLASSIC,
       });
 
       let songs=props.array;
@@ -74,7 +74,7 @@ const [song,setSong]=useState<Song>({
         <input
         type="text"
         placeholder="genre"
-        onChange={(e) =>{setSong({...song,genere:e.target.value})}}
+        onChange={(e) =>{setSong({...song,genere:Genre.CLASSIC})}}
         className="input__box"
       />
         <input

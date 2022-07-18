@@ -1,3 +1,6 @@
+import { Rocket } from "@mui/icons-material";
+import { Interface } from "readline";
+
 export interface Song
 {
     id?: String;
@@ -5,7 +8,9 @@ export interface Song
     artist: string;
     price:number;
     length:number;
-    genere:string;
+    genere:Genre;
 
   }
-  
+ export enum  Genre {"POP" , "ROCK", "CLASSIC" , "RAP"}
+
+ 
