@@ -1,63 +1,59 @@
 
 import '../Components/styles.css'
 import { useLocation, useNavigate } from "react-router-dom";
-import { Song } from "../model";
-import MySong from "../Components/SingleSong";
+import { Employee } from "../model";
+import MySong from "../Components/SingleEmployee";
 import datagrid from '@mui/x-data-grid';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Table, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { IconButton, Table, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { PropaneSharp } from '@mui/icons-material';
+import SingleEmployee from '../Components/SingleEmployee';
 
 
-const HomePage=(props:{array:Song[],searchSong:Function,deleteSong:Function,setArray: React.Dispatch<React.SetStateAction<Song[]>>})=>{
+const HomePage=(props:{array:Employee[],deleteEmployee:Function,setArray: React.Dispatch<React.SetStateAction<Employee[]>>})=>{
   const  location=useLocation();
   const myLoction: any = location.state;
     const navigate = useNavigate();
-    let songs=props.array;
-    let setSongs=props.setArray;
+    let employees=props.array;
+    let setEmployees=props.setArray;
     
-let artist:string=" ";
+
 const onAdd=(e:any) => {
     e.preventDefault();
-    // inputRef.current?.blur();
   
-    navigate(`/AddSong`) 
+    navigate(`/AddEmployee`) 
   }
-  const searchArtist=(e:any,artist:string)=>{
-    e.preventDefault();
-props.searchSong(artist);
-alert(artist);
-  }
+
   
     return(
 <>
   
-  <form  onSubmit={(e) =>
-  searchArtist(e,artist)
-  }>
-  <input placeholder="Enter artist name"
-  onChange={(e)=>artist=e.target.value}/>
-  <button type="submit">search</button>
-  </form>
   <TableContainer>
   <Table sx={{minWidth:250}} aria-label="simple table" className='table-ss'>
 <TableHead>
   <TableRow>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">title</TableCell>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">artist</TableCell>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">price</TableCell>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">genre</TableCell>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">length</TableCell>
-    <TableCell sx={{color:'rgb(242,68,119)'}} align="center">delete/edit</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">FULL NAME</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">TZ</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">MOBILE PHONE</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">PHONE</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">STREET</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">HOUSE NUMBER</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">CITY</TableCell>
+    <TableCell sx={{color:'rgb(260,0,0)'}} align="center">BIRTH DATE</TableCell>
+   
   </TableRow>
-</TableHead>{songs.map((song,index)=><MySong key={index} song={song} deleteSong={props.deleteSong} songs={songs} setSongs={setSongs}/> )}
+</TableHead>{employees.map((employee,index)=><SingleEmployee key={index} employee={employee} deleteEmployee={props.deleteEmployee} employees={employees} setSongs={setEmployees}/> )}
 
   </Table>
 </TableContainer>
 
-<button onClick={(e)=> onAdd(e)} >ADD</button>
+<IconButton  color="inherit" aria-label="upload picture" component="label">
+            <input hidden  />
+            <AddCircleOutlineIcon sx={{ fontSize: 45 }} onClick={(e)=> onAdd(e)} />
+            </IconButton >
 </>
     )
 

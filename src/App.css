@@ -3,8 +3,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #2f74c0;
+  align-items:  center;
+  background-color: #5d8ebe;
   font-family: "Neucha", cursive;
 }
 
@@ -17,3 +17,6 @@
   text-align: center;
 }
 
+/* input-box{
+  flex-direction: column;
+} */

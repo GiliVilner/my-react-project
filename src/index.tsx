@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
-import AddSong from './Pages/AddSong';
+import AddSong from './Pages/AddEmployee';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
